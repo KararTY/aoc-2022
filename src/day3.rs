@@ -1,5 +1,9 @@
 pub mod day_three {
-    use std::{collections::{BTreeSet, BTreeMap}, fs, str::Lines};
+    use std::{
+        collections::{BTreeMap, BTreeSet},
+        fs,
+        str::Lines,
+    };
 
     pub fn run() {
         let file_contents: String = fs::read_to_string("./src/inputs/day3.txt")
@@ -38,42 +42,41 @@ pub mod day_three {
     fn part_two(lines: Lines) {
         let mut result: i32 = 0;
 
-				let mut groups = Vec::new();
+        let mut groups = Vec::new();
 
-				for (index, line) in lines.enumerate() {
-					if index % 3 == 0 {
-						let mut vec = Vec::new();
-						vec.push(line);
+        for (index, line) in lines.enumerate() {
+            if index % 3 == 0 {
+                let mut vec = Vec::new();
+                vec.push(line);
 
-						groups.push(vec);
-					} else {
-						groups.last_mut().unwrap().push(line);
-					}
-				}
+                groups.push(vec);
+            } else {
+                groups.last_mut().unwrap().push(line);
+            }
+        }
 
-				for group_lines in groups {
-					let mut count_of_unique_chars: BTreeMap<char, i32> = BTreeMap::new();
+        for group_lines in groups {
+            let mut count_of_unique_chars: BTreeMap<char, i32> = BTreeMap::new();
 
-					for line in group_lines {
-						let mut items: BTreeSet<char> = BTreeSet::new();
+            for line in group_lines {
+                let mut items: BTreeSet<char> = BTreeSet::new();
 
-						for character in line.chars() {
-							items.insert(character);
-						}
+                for character in line.chars() {
+                    items.insert(character);
+                }
 
-						for character in items {
-							let entry = count_of_unique_chars.entry(character).or_default();
-							(*entry) += 1;
-						}
+                for character in items {
+                    let entry = count_of_unique_chars.entry(character).or_default();
+                    (*entry) += 1;
+                }
 
-						let unique_char = count_of_unique_chars.iter().find(|(_, &hits)| hits == 3);
+                let unique_char = count_of_unique_chars.iter().find(|(_, &hits)| hits == 3);
 
-						if let Some(unique_char) = unique_char {
-							result += calculate_character_priority(unique_char.0.clone());
-						}
-
-					}
-				}
+                if let Some(unique_char) = unique_char {
+                    result += calculate_character_priority(unique_char.0.clone());
+                }
+            }
+        }
 
         println!("Day 3 Part Two:\n{:?}", result);
     }
