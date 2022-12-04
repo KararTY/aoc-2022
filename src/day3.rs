@@ -69,12 +69,12 @@ pub mod day_three {
                     let entry = count_of_unique_chars.entry(character).or_default();
                     (*entry) += 1;
                 }
+            }
 
-                let unique_char = count_of_unique_chars.iter().find(|(_, &hits)| hits == 3);
+            let unique_char = count_of_unique_chars.iter().find(|(_, &hits)| hits == 3);
 
-                if let Some(unique_char) = unique_char {
-                    result += calculate_character_priority(unique_char.0.clone());
-                }
+            if let Some(unique_char) = unique_char {
+                result += calculate_character_priority(unique_char.0.clone());
             }
         }
 
