@@ -54,7 +54,7 @@ pub fn run() {
         let from: usize = instruction.split(" ").nth(3).unwrap().parse().unwrap();
         let to: usize = instruction.split(" ").nth(5).unwrap().parse().unwrap();
 
-        let row = part_one_vector.get_mut(from - 1 as usize).unwrap();
+        let row = part_one_vector.get_mut(from - 1).unwrap();
 
         let mut cargos: Vec<char> = row.drain(0..amount).collect();
 
