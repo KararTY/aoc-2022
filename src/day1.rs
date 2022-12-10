@@ -33,6 +33,7 @@ fn part_two(elves_calories: &Vec<i32>) {
         for i in 0..largest_numbers.len() {
             if calories > &largest_numbers[i] {
                 largest_numbers[i] = *calories;
+                largest_numbers.sort();
                 break;
             }
         }
